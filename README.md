@@ -185,3 +185,14 @@ docker <command>
 - `rmi` Remove images
 - `image prune` Remove intermediate layers to free up storage
 
+## Things you might do from here
+
+You can try fiddling with it just to learn more about docker. E.g.
+- automate the `makemigrations` and the `migrate` commands.
+- automate the `collectstatic` command of django.
+- automate the `createsuperuser` command to pre-populate the database.
+- setup Nginx server that routes requests to the django server.
+- run django server in production mode, i.e., don't use `runserver`, use `uwsgi` or `gunicorn` with Nginx.
+- add Redis database that communicates through unix socket.
+
+All of these should work by running just the `docker-compose up --build` command.
