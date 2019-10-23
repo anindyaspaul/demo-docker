@@ -1,10 +1,12 @@
-# Demo
+# Demo Docker
+
+As presented at Digital Product School.
 
 _You might need to add sudo before the docker commands._
 
-_Instead of vim, you can use text editor of your choice._
+_Replace vim with the text editor of your choice._
 
-### Prerequisites
+## Prerequisites
 
 Install `docker` and `docker-compose` so that you can see the version names from the following commands.
 
@@ -12,6 +14,38 @@ Install `docker` and `docker-compose` so that you can see the version names from
 docker -v
 docker-compose -v
 ```
+
+Now you can do either of the following.
+
+1. Build and run the project from this repo
+2. Create the django project from scratch
+
+## 1. Build and run the project from the repo
+
+### Clone and get into the project
+
+```bash
+git clone https://github.com/anindyaspaul/demo-docker.git
+cd demo-docker
+```
+
+### Run the services and visit 127.0.0.1:8000
+
+```bash
+docker-compose up --build
+```
+
+[Create the db tables (optional)](#user-content-run-django-migrations-to-create-db-tables)
+
+[Create a superuser (optional)](#user-content-create-a-superuser-for-the-admin)
+
+### Take down the services
+
+```bash
+docker-compose down
+```
+
+## 2. Create project from scratch
 
 ### Create project directory
 
@@ -128,22 +162,37 @@ DATABASES = {
 docker run -v ~/codes/dps/demo-docker:/code -p 8000:8000 demo python manage.py runserver 0.0.0.0:8000
 ```
 
+### Run django migrations to create db tables
+
+```bash
+docker-compose run web python manage.py makemigrations
+docker-compose run web python manage.py migrate
+```
+
+### Create a superuser for the admin
+
+```bash
+docker-compose run web python manage.py createsuperuser
+```
+
 ### Run the services using docker-compose
 
 ```bash
 docker-compose up --build
 ```
 
-docker-compose run web python manage.py makemigrations
+## Some useful commands
 
-docker-compose run web python manage.py migrate
+```bash
+docker <command>
+```
 
-docker-compose run web python manage.py createsuperuser
-
-docker ps
-
-psql -h localhost -U postgres
-\dt
-select * from auth_user;
-\q
-
+- `ps` See running containers
+- `ps -a` See all containers
+- `start` containers
+- `stop` containers
+- `restart` containers
+- `rm` Remove containers
+- `images` See all images
+- `rmi` Remove images
+- `image prune` Remove intermediate layers to free up storage
