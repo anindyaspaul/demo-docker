@@ -1,10 +1,10 @@
 # Demo Docker
 
-As presented at Digital Product School.
+As presented at [Digital Product School](https://digitalproductschool.io/).
 
 _You might need to add sudo before the docker commands._
 
-_Replace vim with the text editor of your choice._
+_Feel free to contact me for questions/help._
 
 ## Prerequisites
 
@@ -29,11 +29,13 @@ git clone https://github.com/anindyaspaul/demo-docker.git
 cd demo-docker
 ```
 
-### Run the services and visit 127.0.0.1:8000
+### Run the services
 
 ```bash
 docker-compose up --build
 ```
+
+Visit [localhost:8000](http://localhost:8000)
 
 [Create the db tables (optional)](#user-content-run-django-migrations-to-create-db-tables)
 
@@ -56,24 +58,14 @@ cd demo-docker
 
 ### List django dependencies
 
-```
-vim requirements.txt
-```
-
-Enter the following.
+Create `requirements.txt` with the following content.
 
 ```
 Django
 psycopg2
 ```
 
-### Create Dockerfile
-
-```bash
-vim Dockerfile
-```
-
-Enter the following.
+### Create `Dockerfile`
 
 ```Dockerfile
 FROM python:3
@@ -103,19 +95,17 @@ docker images
 docker run -v ~/codes/dps/demo-docker:/code demo django-admin startproject demo .
 ```
 
-### Run the project and visit 127.0.0.0:8000
+### Run the project
 
 ```bash
 docker run -v ~/codes/dps/demo-docker:/code -p 8000:8000 demo python manage.py runserver 0.0.0.0:8000
 ```
 
+Visit [localhost:8000](http://localhost:8000)
+
 ### Create docker compose file to run multiple services (for the db)
 
-```bash
-vim docker-compose.yml
-```
-
-Enter the following.
+Create `docker-compose.yml` with the following content.
 
 ```
 version: '3'
@@ -138,11 +128,7 @@ services:
 
 ### Add database configuration in the settings file
 
-```bash
-sudo vim demo/settings.py
-```
-
-Replace the database entry with the following.
+Replace the `DATABASES` entry in `demo/settings.py` with the following.
 
 ```python
 DATABASES = {
@@ -156,11 +142,13 @@ DATABASES = {
 }
 ```
 
-### Run the server again and visit 127.0.0.1:8000
+### Run the server again
 
 ```bash
 docker run -v ~/codes/dps/demo-docker:/code -p 8000:8000 demo python manage.py runserver 0.0.0.0:8000
 ```
+
+Visit [localhost:8000](http://localhost:8000)
 
 ### Run django migrations to create db tables
 
@@ -196,3 +184,4 @@ docker <command>
 - `images` See all images
 - `rmi` Remove images
 - `image prune` Remove intermediate layers to free up storage
+
